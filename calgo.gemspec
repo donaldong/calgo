@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = 'calgo'
-  s.version       = '0.0.1'
+  s.version       = '0.0.2'
   s.date          = '2021-02-21'
   s.summary       = 'Common algorithms and data structures'
   s.authors       = ['Donald Dong']
