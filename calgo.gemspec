@@ -11,6 +11,8 @@ Gem::Specification.new do |s|
     'ext/calgo/kdtree/extconf.rb',
   ]
 
+  s.required_ruby_version = '>= 2.1'
+
   s.add_development_dependency 'byebug'
   s.add_development_dependency 'rake-compiler'
   s.add_development_dependency 'rspec', '~> 3.2'
