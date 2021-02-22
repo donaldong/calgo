@@ -2,4 +2,4 @@
 require 'mkmf'
 
 create_header
-create_makefile('calgo/kdtree')
+create_makefile('calgo_ext/kdtree')
