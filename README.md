@@ -1,6 +1,7 @@
 Calgo
 =====
 [![Gem Version](https://badge.fury.io/rb/calgo.svg)](https://badge.fury.io/rb/calgo)
+[![Build Status](https://travis-ci.com/donaldong/calgo.svg?branch=main)](https://travis-ci.com/donaldong/calgo)
 
 Common algorithms and data structures as Ruby C extensions
 
