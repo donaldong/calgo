@@ -13,8 +13,8 @@ Common algorithms and data structures as Ruby C extensions
 ### [K-d Tree](https://github.com/jtsiomb/kdtree)
 ```ruby
 tree = Calgo::KdTree.new(dimension: 3)
-a = Point.new(-5, -5, -5)
-b = Point.new(1, 1, 1)
+a = Point.new(-5, -5, -5) # Point#position => [-5, -5, -5]
+b = Point.new(1, 1, 1) # Point#position => [1, 1, 1]
 tree.insert(a)
 tree.insert(b)
 
