@@ -10,6 +10,22 @@ Common algorithms and data structures as Ruby C extensions
 - [x] 🥰 Actively maintained by Donald Dong
 
 ## Trees
+### [AVL Tree](https://github.com/fragglet/c-algorithms/blob/master/src/avl-tree.h)
+```ruby
+tree = Calgo::AvlTree.new { |node| node.key }
+Node = Struct.new(:key)
+(0...11).each { |i| tree.insert(Node.new(i)) }
+tree.each(order: :pre, lower_bound: 3, upper_bound: 8) do |node|
+  #<struct Node key=3>
+  #<struct Node key=7>
+  #<struct Node key=5>
+  #<struct Node key=4>
+  #<struct Node key=6>
+  node
+end
+tree.delete(Node.new(3))
+tree.size # 10
+```
 ### [K-d Tree](https://github.com/jtsiomb/kdtree)
 ```ruby
 tree = Calgo::KdTree.new(dimension: 3)

@@ -4,6 +4,7 @@ require 'rspec/core/rake_task'
 require 'bundler/gem_tasks'
 
 Rake::ExtensionTask.new('calgo_ext/kdtree')
+Rake::ExtensionTask.new('calgo_ext/avltree')
 RSpec::Core::RakeTask.new
 
 task :default => [:compile, :spec]
