@@ -116,7 +116,7 @@ _kd_nearest(VALUE self, VALUE range, VALUE position)
  * end
  */
 void
-Init_extension(void)
+Init_kdtree(void)
 {
   VALUE cCalgo = rb_define_module("Calgo");
   VALUE cKdTree = rb_define_class_under(cCalgo, "KdTree", rb_cObject);

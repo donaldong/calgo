@@ -2,4 +2,4 @@
 require 'mkmf'
 
 create_header
-create_makefile('kdtree/extension')
+create_makefile('kdtree')
