@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib', 'ext']
 
   s.extensions = [
-    'ext/kdtree/extconf.rb',
+    'ext/calgo/kdtree/extconf.rb',
   ]
 
   s.add_development_dependency 'byebug'

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require 'kdtree/extension'
+require 'calgo/kdtree'
 require 'set'
 
 module Calgo
