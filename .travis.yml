@@ -1,8 +1,20 @@
 language: ruby
+
 rvm:
-  - 2.6
-  - 2.5
-  - 2.4
-  - 2.3
-  - 2.2
-  - 2.1
+- 2.6
+- 2.5
+- 2.4
+- 2.3
+- 2.2
+- 2.1
+
+deploy:
+  provider: rubygems
+  api_key:
+    secure: EgqNBGWi6aULVOujmk2/dkFiQTmcNi4SUFikx+wTobBNUIh5m6kLJT04NhH93dh1nvucFdZFfCiVjzpCEKUMDUy4cIL23UdTbp/aROAtGpQeookxoZ+mTebRI47FdnvnszmajrdEdSXzij0gZpDPYZNs3JdA1P4XYEMhPB4mQLhJp3mpjhc0En0/ZiZuMz1B+Biz9CaEq8oqZJHfzODLoOJUyUTHWvmGrCCT62vG5K3br8Vg3W5js8ar+v9VtLnd4tE9OmMJ+HQbZLh0XpI1paSO0XEG9EU+dg1Gfullpw5KzCNJWn8iO/pt7bCrxszfdhqXzOxhsW7Xounz2gGXm36onIXBKmiAFISMw5Gt1s49kBPPohnUlnWBr1Z23UzS2WAxEzrtORR5q/RiX57cEpjGqpgeSQQWXKWXTYMb5zwap02tKdlFoJel4D1mmOn4NZLLBKDLkkbx3uAEvS9KM9maDarPFDuEEjITpz6FUUQ1INIFTxlyC9HBXGGzoOAAsNyIUXq5C6KjcJu+J9JolG3dUWS6tXFheIsytg/oz6nrT/MNTg61r4s7GL8h3elZ4MqY3Z5Cc/+QaBGJHNg2FDkcaZ0BPpw88FjmXrdRCD8y0W/9lLo6yAZ4PY2niQKcV9/IH3yqwAM0esybmIyxzypW/vw/4qMfF+3Bw77n4VY=
+  gem: calgo
+  on:
+    tags: true
+    repo: donaldong/calgo
+    branch: main
+  skip_cleanup: 'true'
