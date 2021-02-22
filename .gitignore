@@ -45,7 +45,7 @@
 extconf.h
 *.o
 *.bundle
-/ext/*/Makefile
+/ext/*/*/Makefile
 
 /log
 /sorbet/rbi/hidden-definitions/errors.txt
