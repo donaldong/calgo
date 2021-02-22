@@ -8,7 +8,7 @@ Gem::Specification.new do |s|
   s.require_paths = ['lib', 'ext']
 
   s.extensions = [
-    'ext/calgo/kdtree/extconf.rb',
+    'ext/calgo_ext/kdtree/extconf.rb',
   ]
 
   s.required_ruby_version = '>= 2.1'
