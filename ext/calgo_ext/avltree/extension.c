@@ -35,7 +35,7 @@ static const rb_data_type_t avl_tree_type = {
 };
 
 static int
-_avl_compare_func(AVLTreeValue value1, AVLTreeValue value2)
+_avl_compare_func(VALUE value1, VALUE value2)
 {
   VALUE eql = rb_funcall(value1, rb_intern("=="), 1, value2);
 
@@ -54,7 +54,7 @@ _avl_compare_func(AVLTreeValue value1, AVLTreeValue value2)
 static VALUE
 _avl_alloc(VALUE self)
 {
-  AVLTree *tree = avl_tree_new(&_avl_compare_func);
+  AVLTree *tree = avl_tree_new((AVLTreeCompareFunc) &_avl_compare_func);
 
   return TypedData_Wrap_Struct(self, &avl_tree_type, tree);
 }
@@ -79,7 +79,7 @@ _avl_insert(VALUE self, VALUE key, VALUE node)
   AVLTree *tree;
 
   TypedData_Get_Struct(self, AVLTree, &avl_tree_type, tree);
-  avl_tree_insert(tree, key, node);
+  avl_tree_insert(tree, (void *) key, (void *)node);
 
   return Qnil;
 }
@@ -100,7 +100,7 @@ _avl_include(VALUE self, VALUE key)
   AVLTree *tree;
   TypedData_Get_Struct(self, AVLTree, &avl_tree_type, tree);
 
-  if (avl_tree_lookup_node(tree, key)) {
+  if (avl_tree_lookup_node(tree, (void *) key)) {
     return Qtrue;
   }
 
@@ -114,7 +114,7 @@ _avl_delete(VALUE self, VALUE key)
 
   TypedData_Get_Struct(self, AVLTree, &avl_tree_type, tree);
 
-  if (avl_tree_remove(tree, key)) {
+  if (avl_tree_remove(tree, (void *) key)) {
     return Qtrue;
   }
 
@@ -129,7 +129,7 @@ _avl_left(AVLTree *tree, AVLTreeNode *node, VALUE lower_bound)
 	}
 
   if (!NIL_P(lower_bound)) {
-	  int diff = tree->compare_func(node->key, lower_bound);
+	  int diff = tree->compare_func(node->key, (void *) lower_bound);
 
     if (diff < 0) {
       return NULL;
@@ -147,7 +147,7 @@ _avl_right(AVLTree *tree, AVLTreeNode *node, VALUE upper_bound, VALUE include_up
 	}
 
   if (!NIL_P(upper_bound)) {
-	  int diff = tree->compare_func(upper_bound, node->key);
+	  int diff = tree->compare_func((void *) upper_bound, node->key);
 
     if (RTEST(include_upper_bound)) {
       if (diff < 0) {
@@ -170,21 +170,21 @@ _yield_if_valid(AVLTree *tree, AVLTreeNode *node, VALUE generator, VALUE lower_b
   int diff_left = 0, diff_right = 1;
 
   if (!NIL_P(lower_bound)) {
-    diff_left = tree->compare_func(node->key, lower_bound);
+    diff_left = tree->compare_func(node->key, (void *) lower_bound);
   }
 
   if (!NIL_P(upper_bound)) {
-    diff_right = tree->compare_func(upper_bound, node->key);
+    diff_right = tree->compare_func((void *) upper_bound, node->key);
   }
 
   if (RTEST(include_upper_bound)) {
     if (diff_left >= 0 && diff_right >= 0) {
-      rb_funcall(generator, rb_intern("yield"), 2, node->key, node->value);
+      rb_funcall(generator, rb_intern("yield"), 2, (VALUE) node->key, (VALUE) node->value);
     }
   }
   else {
     if (diff_left >= 0 && diff_right > 0) {
-      rb_funcall(generator, rb_intern("yield"), 2, node->key, node->value);
+      rb_funcall(generator, rb_intern("yield"), 2, (VALUE) node->key, (VALUE) node->value);
     }
   }
 }
@@ -249,31 +249,37 @@ _avl_yield_postorder(AVLTree *tree, AVLTreeNode *node, VALUE generator, VALUE lo
   _yield_if_valid(tree, node, generator, lower_bound, upper_bound, include_upper_bound);
 }
 
-static void
+static VALUE
 _yield_preorder(VALUE self, VALUE generator, VALUE lower_bound, VALUE upper_bound, VALUE include_upper_bound)
 {
   AVLTree *tree;
 
   TypedData_Get_Struct(self, AVLTree, &avl_tree_type, tree);
   _avl_yield_preorder(tree, tree->root_node, generator, lower_bound, upper_bound, include_upper_bound);
+
+  return Qnil;
 }
 
-static void
+static VALUE
 _yield_inorder(VALUE self, VALUE generator, VALUE lower_bound, VALUE upper_bound, VALUE include_upper_bound)
 {
   AVLTree *tree;
 
   TypedData_Get_Struct(self, AVLTree, &avl_tree_type, tree);
   _avl_yield_inorder(tree, tree->root_node, generator, lower_bound, upper_bound, include_upper_bound);
+
+  return Qnil;
 }
 
-static void
+static VALUE
 _yield_postorder(VALUE self, VALUE generator, VALUE lower_bound, VALUE upper_bound, VALUE include_upper_bound)
 {
   AVLTree *tree;
 
   TypedData_Get_Struct(self, AVLTree, &avl_tree_type, tree);
   _avl_yield_postorder(tree, tree->root_node, generator, lower_bound, upper_bound, include_upper_bound);
+
+  return Qnil;
 }
 
 void
