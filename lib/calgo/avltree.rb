@@ -8,17 +8,17 @@ module Calgo
       @blk = blk
     end
 
-    def each(lower_bound: nil, upper_bound: nil, order: :in, &blk)
+    def each(order=:in_order, lower_bound: nil, upper_bound: nil, include_upper_bound: false, &blk)
       enumerator = Enumerator.new do |generator|
         case order
-        when :pre
-          _yield_preorder(generator, lower_bound, upper_bound)
-        when :in
-          _yield_inorder(generator, lower_bound, upper_bound)
-        when :post
-          _yield_postorder(generator, lower_bound, upper_bound)
+        when :pre_order
+          _yield_preorder(generator, lower_bound, upper_bound, include_upper_bound)
+        when :in_order
+          _yield_inorder(generator, lower_bound, upper_bound, include_upper_bound)
+        when :post_order
+          _yield_postorder(generator, lower_bound, upper_bound, include_upper_bound)
         else
-          raise ArgumentError, '"order" must be one of :pre, :in, :post'
+          raise ArgumentError, 'Invalid order: must be one of :pre_order, :in_order, :post_order'
         end
       end
 
@@ -29,27 +29,31 @@ module Calgo
       end
     end
 
-    def to_a(**options)
-      each(**options).to_a
+    def to_a(*args)
+      each(*args).to_a
+    end
+
+    def [](key)
+      ret = Array.new
+      each(lower_bound: key, upper_bound: key, include_upper_bound: true) do |_, node|
+        ret << node
+      end
+      ret
     end
 
     private
 
-    def _key(node)
-      if @blk
-        @blk.call(node)
-      else
-        node
-      end
-    end
-
     def _compare(key_a, key_b)
-      if key_a == key_b
-        0 
-      elsif key_a < key_b
-        -1
+      if @blk
+        @blk.call(key_a, key_b)
       else
-        1
+        if key_a == key_b
+          0 
+        elsif key_a < key_b
+          -1
+        else
+          1
+        end
       end
     end
   end
