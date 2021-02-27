@@ -27,6 +27,9 @@ tree[3] # []
 tree[4] # [#<struct Node key=4>]
 tree.size # 10
 ```
+Trees with similar an API:
+- [Red-black Tree](https://github.com/fragglet/c-algorithms/blob/master/src/rb-tree.h)
+
 ### [K-d Tree](https://github.com/jtsiomb/kdtree)
 ```ruby
 tree = Calgo::KdTree.new(dimension: 3)
