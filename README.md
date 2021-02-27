@@ -11,11 +11,11 @@ Common algorithms and data structures as Ruby C extensions
 
 ## Trees
 ### Balanced Binary Tree
-- [AVL Tree](https://github.com/fragglet/c-algorithms/blob/master/src/avl-tree.h)
-- [Red-black Tree](https://github.com/fragglet/c-algorithms/blob/master/src/rb-tree.h)
+- AVL Tree (source: [c-algorithms](https://github.com/fragglet/c-algorithms/blob/master/src/avl-tree.h))
+- Red-Black Tree (source: [c-algorithms](https://github.com/fragglet/c-algorithms/blob/master/src/rb-tree.h))
 ```ruby
 Node = Struct.new(:key)
-tree = Calgo::AvlTree.new
+tree = Calgo::AvlTree.new # Or other binary search tree classes
 (0...11).each { |i| tree.insert(i, Node.new(i)) }
 tree.each(:pre_order, lower_bound: 3, upper_bound: 8) do |key, node|
   #<struct Node key=3>
@@ -30,7 +30,8 @@ tree[4] # [#<struct Node key=4>]
 tree.size # 10
 ```
 
-### [K-d Tree](https://github.com/jtsiomb/kdtree)
+### K-d Tree
+source: [c-algorithms](https://github.com/jtsiomb/kdtree)
 ```ruby
 tree = Calgo::KdTree.new(dimension: 3)
 a = Point.new(-5, -5, -5) # Point#position => [-5, -5, -5]
