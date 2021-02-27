@@ -10,7 +10,9 @@ Common algorithms and data structures as Ruby C extensions
 - [x] 🥰 Actively maintained by Donald Dong
 
 ## Trees
-### [AVL Tree](https://github.com/fragglet/c-algorithms/blob/master/src/avl-tree.h)
+### Balanced Binary Tree
+- [AVL Tree](https://github.com/fragglet/c-algorithms/blob/master/src/avl-tree.h)
+- [Red-black Tree](https://github.com/fragglet/c-algorithms/blob/master/src/rb-tree.h)
 ```ruby
 Node = Struct.new(:key)
 tree = Calgo::AvlTree.new
@@ -27,8 +29,6 @@ tree[3] # []
 tree[4] # [#<struct Node key=4>]
 tree.size # 10
 ```
-Trees with similar an API:
-- [Red-black Tree](https://github.com/fragglet/c-algorithms/blob/master/src/rb-tree.h)
 
 ### [K-d Tree](https://github.com/jtsiomb/kdtree)
 ```ruby
